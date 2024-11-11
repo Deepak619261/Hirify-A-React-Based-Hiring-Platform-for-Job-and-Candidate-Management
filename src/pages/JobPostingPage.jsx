@@ -14,6 +14,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import EditIcon from "@mui/icons-material/Edit";
+import InfoIcon from "@mui/icons-material/Info"; // New icon import
 
 const JobPostingPage = () => {
   const { jobId } = useParams();
@@ -139,7 +140,12 @@ const JobPostingPage = () => {
               primary={
                 <Link
                   to={`/job/${jobId}/candidate/${candidate.id}`}
-                  style={{ textDecoration: "none", color: "#1976d2" }}
+                  style={{
+                    textDecoration: "underline",
+                    color: "#1976d2",
+                    fontWeight: "bold",
+                    fontSize: "1.1em",
+                  }}
                 >
                   <Typography variant="h6">{candidate.name}</Typography>
                 </Link>
@@ -151,23 +157,28 @@ const JobPostingPage = () => {
                 </Typography>
               }
             />
-            <div>
-              <a
-                href={candidate.resume}
-                download
-                style={{ textDecoration: "none" }}
-              >
-                <IconButton>
-                  <UploadFileIcon />
-                </IconButton>
-              </a>
-              <IconButton onClick={() => editCandidate(candidate)}>
-                <EditIcon />
+            <IconButton
+              component={Link}
+              to={`/job/${jobId}/candidate/${candidate.id}`}
+              style={{ color: "#1976d2" }}
+            >
+              <InfoIcon />
+            </IconButton>
+            <a
+              href={candidate.resume}
+              download
+              style={{ textDecoration: "none" }}
+            >
+              <IconButton>
+                <UploadFileIcon />
               </IconButton>
-              <IconButton onClick={() => deleteCandidate(candidate.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </div>
+            </a>
+            <IconButton onClick={() => editCandidate(candidate)}>
+              <EditIcon />
+            </IconButton>
+            <IconButton onClick={() => deleteCandidate(candidate.id)}>
+              <DeleteIcon />
+            </IconButton>
           </ListItem>
         ))}
       </List>
@@ -259,7 +270,6 @@ const JobPostingPage = () => {
         </form>
       </Box>
 
-      {/* Back to Dashboard Button at the bottom */}
       <Button
         variant="contained"
         onClick={() => navigate("/dashboard")}

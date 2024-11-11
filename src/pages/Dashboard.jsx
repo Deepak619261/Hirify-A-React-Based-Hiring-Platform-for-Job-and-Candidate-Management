@@ -23,7 +23,7 @@ const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [jobForm, setJobForm] = useState({ title: "", description: "" });
-  const [expandedDescriptionId, setExpandedDescriptionId] = useState(null); // Track which job's description is expanded
+  const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
@@ -63,7 +63,7 @@ const Dashboard = () => {
   };
 
   const toggleDescription = (id) => {
-    setExpandedDescriptionId(expandedDescriptionId === id ? null : id); // Toggle expanded description for each job
+    setExpandedDescriptionId(expandedDescriptionId === id ? null : id);
   };
 
   return (
@@ -122,9 +122,11 @@ const Dashboard = () => {
                   <Link
                     to={`/job/${job.id}`}
                     style={{
-                      textDecoration: "none",
+                      textDecoration: "underline",
                       color: "#1976d2",
-                      fontWeight: "500",
+                      fontWeight: "bold",
+                      fontSize: "1.1em",
+                      cursor: "pointer",
                     }}
                   >
                     {job.title}
@@ -185,12 +187,28 @@ const Dashboard = () => {
                     onClick={() => deleteJob(job.id)}
                     variant="outlined"
                     style={{
+                      marginRight: "10px",
                       fontWeight: "bold",
                       color: "#d32f2f",
                       borderColor: "#d32f2f",
                     }}
                   >
                     Delete
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      window.location.href = `/job/${job.id}`;
+                    }}
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#009688",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      borderRadius: "5px",
+                      marginLeft: "5px",
+                    }}
+                  >
+                    Candidate Details
                   </Button>
                 </TableCell>
               </TableRow>
